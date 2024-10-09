@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libreria</title>
+    <link rel="stylesheet" href="{% static 'estilos.css' %}">
+</head>
+<body>
+    <h1>Hola comunidad</h1>
+    <br>
+    <p>Hola como estan C:</p>
+ <hr>
+ <ul>
+    {% for i in obj %}
+    <li>  {{i.titulo.all}} </li>
+    {% endfor %}
+ </ul>
+    <script src="{% static 'scrip.js' %}"></script>
+</body>
+</html>
