@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row">
+    <div class="col-sm-8 col-md-4 col-lg-4 col-xl-4"> <!--columna izquierda-->
+        <h1> Registrar libro </h1>
+        <div class="card"> <!--Targeta-->
+            <div class="card-body">
+                <form action="/registrarLibro/" method="POST"> {% csrf_token %}<!--formulario-->
+
+                    <div class="form-group"> <!--Id del libro-->
+                        <input type="text" id="txtcodigo" name="txtcodigo" class="form-control"
+                        placeholder="Codigo libro" minLenght="6" maxLenght="6" reqired>
+                    </div>
+                    
+                    <div class="form-group py-3"> <!--Titulo-->
+                        <input type="text" id="txttitulo" name="txttitulo" class="form-control"
+                        placeholder="Titulo"  maxLenght="100" reqired>
+                    </div>
+
+                    <div class="form-group py-3"><!--Autor -->
+                        <input type="text" id="txtautor" name="txtautor" class="form-control"
+                        placeholder="Autor"  maxLenght="100" reqired>
+                    </div>
+
+                    <div class="form-group py-3"><!--Ilustrador -->
+                        <input type="text" id="txtilustrador" name="txtilustrador" class="form-control"
+                        placeholder="Ilustrador"  maxLenght="100" reqired>
+                    </div>
+
+                    <div class="form-group py-3"><!--Año de salida -->
+                        <input type="date" id="txtfecha" name="txtfecha" class="form-control"
+                        placeholder="Año de salida"  maxLenght="100" reqired>
+                    </div>
+
+                    <div class="form-group "> <!--Precio-->
+                        <input type="number" id="numprecio" name="numprecio" class="form-control" placeholder="Precio"
+                        min="1" max="100000" reqired>
+                    </div>
+
+                    <div class="form-group "> <!--stock-->
+                        <input type="number" id="numstock" name="numstock" class="form-control"
+                        placeholder="Stock"  min="1" max="100000" reqired>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div> <!--Targeta-->
+    <div class="col-md-16 col-md-5 col-lg-4 col-xl-4"> <!--columna derecha-->
+        <h1> Listado de Materias </h1>
+        <div class="table-responsive"> <!--tabla responsive-->
+            <table class="table table-secondary">
+                <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Id Libro</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Autor</th>
+                <th scope="col">Ilustrador</th>
+                <th scope="col">Año</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for l in mislibros  %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{l.Id_libro}}</td>
+                    <td>{{l.Titulo}}</td>
+                    <td>{{l.Autor}}</td>
+                    <td>{{l.Ilustrador}}</td>
+                    <td>{{l.Año_de_salida}}</td>
+                    <td>{{l.Precio}}</td>
+                    <td>{{l.Stock}}</td>
+                    <td> <a href="seleccionarMateria/{{m.codigo}}" class="btn btn-info">Editar</td>
+                    <td> <a href="borrarMateria/{{m.codigo}}" class="btn btn-danger">Borrar</a></td>
+                </tr> 
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
